@@ -1,0 +1,38 @@
+/* HeroContent.module.css */
+.heroContent {
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .heroDescription {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .heroContent {
+      text-align: center;
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+  
+    .buttonContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
