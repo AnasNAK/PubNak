@@ -1,0 +1,41 @@
+.bodyOverlay::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  background-image: radial-gradient(circle at 25% 25%, rgba(145, 255, 0, 0.422) 0%, transparent 30%),
+    radial-gradient(circle at 75% 75%, rgba(145, 255, 0, 0.422) 0%, transparent 30%);
+  background-size: 200% 200%;
+  background-position: 0 0, 50% 50%;
+  animation: circleAnimation 10s linear infinite;
+  filter: blur(15px);
+}
+
+@keyframes circleAnimation {
+  0% {
+    background-position: 0 0, 50% 50%;
+  }
+  50% {
+    background-position: 100% 100%, 0 0;
+  }
+  100% {
+    background-position: 0 0, 50% 50%;
+  }
+}
+
+
+.goldman-regular {
+  font-family: "Goldman", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.goldman-bold{
+  font-family: "Goldman", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
