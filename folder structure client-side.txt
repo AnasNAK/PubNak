@@ -1,0 +1,61 @@
+
+=============== FOLDER STRUCTURE OF CLIENT-SIDE ======================
+
+
+PUBNAK-CLIENT/
+├── node_modules/
+├── public/
+│   ├── favicon.ico
+│   └── images/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button/
+│   │   │   │   ├── Button.tsx
+│   │   │   │   └── Button.module.css
+│   │   │   └── ...
+│   │   ├── layout/
+│   │   │   ├── Header/
+│   │   │   │   ├── Header.tsx
+│   │   │   │   └── Header.module.css
+│   │   │   └── ...
+│   │   ├── pages/
+│   │   │   ├── HomePage/
+│   │   │   │   ├── HeroSection/
+│   │   │   │   │   ├── HeroSection.tsx
+│   │   │   │   │   └── HeroSection.module.css
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   ├── styles/
+│   │   ├── globals.css
+│   │   └── ...
+│   ├── types/
+│   │   ├── types.ts
+│   │   └── ...
+│   ├── utils/
+│   │   ├── helpers.ts
+│   │   └── ...
+│   ├── pages/
+│   │   ├── _app.tsx
+│   │   ├── _document.tsx
+│   │   ├── index.tsx
+│   │   ├── ChatRoom.tsx
+│   │   └── ...
+│   ├── store/
+│   │   ├── index.js
+│   │   └── ...
+│   ├── features/
+│   ├── api/
+│   │   ├── apiClient.ts
+│   │   └── ...
+│   └── ...
+├── .gitignore
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── tsconfig.json
+└── ...
+
+
+
