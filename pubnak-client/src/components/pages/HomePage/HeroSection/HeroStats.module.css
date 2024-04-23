@@ -1,5 +1,4 @@
-/* HeroStats.module.css */
-.heroStats {
+  .heroStats {
     display: flex;
     justify-content: center;
     gap: 2rem;
