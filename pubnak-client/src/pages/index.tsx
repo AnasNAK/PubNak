@@ -1,17 +1,20 @@
-// src/pages/index.tsx
-
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import Header from '../components/layout/Header/Header';
+import styles from '../styles/index.module.css';
+import Footer from '../components/layout/Footer/Footer'
+import AboutSec from '../components/pages/HomePage/NavigateSection/NavigateSection'
+
 import HeroSection from '../components/pages/HomePage/HeroSection/HeroSection';
 
 
 const HomePage: React.FC = () => {
   return (
-    <div>
-
+    <div className={`${styles.bodyOverlay} min-h-screen`}>
+      <Header />
       <HeroSection />
-      
-      <Link href="/ChatRoom">Go to Chat Room</Link>
+      <AboutSec />
+      <Footer />
 
     </div>
   );
