@@ -40,7 +40,7 @@ const HeroStats: React.FC = () => {
           for promotion this is the best place
         </p>
         <Link href="/Feed">
-          <div className={`cursor-pointer ${styles.goldmanRegular} bg-black text-white  hover:bg-white hover:text-black hover:border-black border-2 border-transparent py-2 px-4 rounded-md hover:scale-110  hover:shadow-md duration-300 transition-all`} style={{  WebkitTextStroke: '1px rgba(145, 255, 0, 0.422)' }}>
+          <div className={`cursor-pointer ${styles.goldmanRegular} bg-black text-white mt-5  hover:bg-white hover:text-black hover:border-black border-2 border-transparent py-2 px-4 rounded-md hover:scale-110  hover:shadow-md duration-300 transition-all`} style={{  WebkitTextStroke: '1px rgba(145, 255, 0, 0.422)' }}>
             Check Posts
           </div>
         </Link>
