@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+
 
 interface InfluencerConnectionProps {
   name: string;
@@ -9,7 +11,7 @@ interface InfluencerConnectionProps {
 const InfluencerConnection: React.FC<InfluencerConnectionProps> = ({ name, role, avatar }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 flex items-center">
-      <img src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" />
+      <Image src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" />
       <div>
         <h3 className="text-sm font-bold">{name}</h3>
         <p className="text-gray-500">{role}</p>

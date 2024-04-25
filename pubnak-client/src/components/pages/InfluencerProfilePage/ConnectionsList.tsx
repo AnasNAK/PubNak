@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+
 
 interface ConnectionProfileProps {
   profilePicture: string;
@@ -12,7 +14,7 @@ const ConnectionProfile: React.FC<ConnectionProfileProps> = ({
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="relative">
-        <img
+        <Image
           src={profilePicture}
           alt="Profile Picture"
           className="w-16 h-16 rounded-full"

@@ -20,7 +20,7 @@ const NavigateSection: React.FC = () => {
                   <Image
                     src={AboutImg}
                     alt="Profile Art"
-                    className="w-[20rem] h-auto  "
+                    className="w-[20rem] h-auto "
                   />
                 </div>
               </div>
@@ -29,7 +29,7 @@ const NavigateSection: React.FC = () => {
                 <Image src={Logo} alt='logo' className='w-[130px]' />
               <h2 className={`${styles.goldmanBold} text-3xl font-bold mb-4 text-black`}>About Publication</h2>
               <p className={`${styles.jacques} text-gray-700 mb-8`}>
-                The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. 
               </p>
               <div className="flex flex-wrap ">
                 <div className={`${styles.goldmanRegular} bg-black text-white px-4 py-2 mr-4 mb-4 rounded-full`} style={{ color: 'white', WebkitTextStroke: '1px rgba(145, 255, 0, 0.422)' }}>Games</div>
