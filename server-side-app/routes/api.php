@@ -18,3 +18,4 @@ Route::prefix('auth')->group(function () {
 Route::apiResource('category',CategoryController::class);
 
 
+
