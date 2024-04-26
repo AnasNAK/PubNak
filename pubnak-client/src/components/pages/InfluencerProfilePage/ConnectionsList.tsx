@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import logo from '../../../../public/images/nak.jpg'
 
 
 interface ConnectionProfileProps {
@@ -18,6 +19,7 @@ const ConnectionProfile: React.FC<ConnectionProfileProps> = ({
           src={profilePicture}
           alt="Profile Picture"
           className="w-16 h-16 rounded-full"
+        
         />
       </div>
       <h3 className="text-lg font-bold mt-2 text-black">Influencer Profile</h3>
@@ -28,18 +30,18 @@ const ConnectionProfile: React.FC<ConnectionProfileProps> = ({
 
 const ConnectionsList: React.FC = () => {
   const connectionProfiles = [
-    { profilePicture: '/profile1.jpg', mutualConnections: 13 },
-    { profilePicture: '/profile2.jpg', mutualConnections: 3 },
-    { profilePicture: '/profile3.jpg', mutualConnections: 2 },
-    { profilePicture: '/profile4.jpg', mutualConnections: 63 },
-    { profilePicture: '/profile5.jpg', mutualConnections: 84 },
-    { profilePicture: '/profile6.jpg', mutualConnections: 5 },
-    { profilePicture: '/profile7.jpg', mutualConnections: 39 },
-    { profilePicture: '/profile8.jpg', mutualConnections: 23 },
-    { profilePicture: '/profile9.jpg', mutualConnections: 9 },
-    { profilePicture: '/profile10.jpg', mutualConnections: 13 },
-    { profilePicture: '/profile11.jpg', mutualConnections: 8 },
-    { profilePicture: '/profile12.jpg', mutualConnections: 4 },
+    { profilePicture: `${logo}`, mutualConnections: 13 },
+    { profilePicture:  `${logo}`, mutualConnections: 3 },
+    { profilePicture:  `${logo}`, mutualConnections: 2 },
+    { profilePicture:  `${logo}`, mutualConnections: 63 },
+    { profilePicture:  `${logo}`, mutualConnections: 84 },
+    { profilePicture:  `${logo}`, mutualConnections: 5 },
+    { profilePicture:  `${logo}`, mutualConnections: 39 },
+    { profilePicture:  `${logo}`, mutualConnections: 23 },
+    { profilePicture:  `${logo}`, mutualConnections: 9 },
+    { profilePicture:  `${logo}`, mutualConnections: 13 },
+    { profilePicture:  `${logo}`, mutualConnections: 8 },
+    { profilePicture:  `${logo}`, mutualConnections: 4 },
   ];
 
   return (

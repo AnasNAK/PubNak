@@ -28,8 +28,12 @@ class AuthController extends BaseApiController
 
         $role = $user ? $user->role : null;
         $name = $user ? $user->name : null;
+        if($role === 'Admin'){
+            return $this->respondWithToken($token, $name, $role , code : 207);
 
-        return $this->respondWithToken($token, $name, $role);
+        }
+
+        return $this->respondWithToken($token, $name, $role );
     }
 
  

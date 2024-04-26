@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 
 class BaseApiController extends Controller
 {
-    protected function respondWithToken($token, $name = null, $role = null)
+    protected function respondWithToken($token, $name = null, $role = null , $code = 200)
     {
         return response()->json([
             'name' => $name,
             'role' => $role,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => 4000000000000
+            'expires_in' => 4000000000000,
+            'code' => $code
+            
+
         ]);
     }
 

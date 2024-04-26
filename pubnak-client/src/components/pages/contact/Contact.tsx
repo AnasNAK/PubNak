@@ -42,7 +42,7 @@ const ContactSection: React.FC = () => {
             <div className="bg-white p-8 rounded-lg shadow-md">
               <h3 className={`${styles.goldmanRegular} text-2xl font-bold mb-4`}>Get in Touch</h3>
               <p className={`${styles.jacques} text-lg mb-4`}>
-                Have any questions or inquiries? Feel free to reach out to us using the form, and we'll get back to you as soon as possible.
+                Have any questions or inquiries? Feel free to reach out to us using the form, and we&apos;ll get back to you as soon as possible.
               </p>
               <div className="flex items-center mb-4">
                 <i className="fas fa-map-marker-alt text-green-500 mr-4"></i>

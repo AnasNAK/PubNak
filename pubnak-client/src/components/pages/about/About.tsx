@@ -14,7 +14,7 @@ const AboutSection: React.FC = () => {
               At PubNak, we are dedicated to providing the best platform for connecting influencers and clients. Our mission is to facilitate seamless collaborations and foster mutually beneficial partnerships.
             </p>
             <p className={`${styles.jacques} text-lg mb-4`}>
-              We understand the importance of effective promotion and marketing strategies in today's digital landscape. That's why we've created a comprehensive platform that brings together talented influencers and businesses seeking to reach their target audiences.
+              We understand the importance of effective promotion and marketing strategies in today&apos;s digital landscape. That&apos;s why we&apos;ve created a comprehensive platform that brings together talented influencers and businesses seeking to reach their target audiences.
             </p>
           </div>
           <div className=" rounded-full w-[20rem] h-[20rem] shadow-md">

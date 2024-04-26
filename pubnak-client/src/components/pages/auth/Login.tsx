@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../../styles/index.module.css';
 import Image from 'next/image';
 import left from '../../../../public/images/signup-left.png';
@@ -6,31 +6,67 @@ import imgright from '../../../../public/images/singup-right.png';
 import logo from '../../../../public/images/logo-filerouge-white 1.png';
 import Link from 'next/link';
 
-const LoginPage: React.FC = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginUser } from '@/features/userSlice';
+import { RootState, AppDispatch } from '@/store/store';
+
+
+interface SignInSectionProps { }
+
+const LoginPage: React.FC<SignInSectionProps> = () => {
+
+  const { loading, error } = useSelector((state: RootState) => state.user);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [userData, setuserData] = useState({
+    email:'',
+    password:'',
+  });
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+
+    setuserData({...userData,[e.target.name] : e.target.value});
+  };
+
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
+    dispatch(LoginUser(userData))
+  };
+
+
+
+
+
+
   return (
     <div className={`${styles.bodyOverlay} flex relative justify-center items-center h-screen `}>
-        <div className=' w-[20rem] absolute z-[-1] top-12 right-[15rem]'>
-            <Image src={imgright} alt='text' />
-        </div>
-        <div className=' w-[20rem] absolute z-[-1] bottom-12 left-[15rem]'>
-            <Image src={left} alt='text' />
-        </div>
-       
+      <div className=' w-[20rem] absolute z-[-1] top-12 right-[15rem]'>
+        <Image src={imgright} alt='text' />
+      </div>
+      <div className=' w-[20rem] absolute z-[-1] bottom-12 left-[15rem]'>
+        <Image src={left} alt='text' />
+      </div>
+
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-8">
           <div className="bg-white rounded-lg shadow-md p-8 w-full">
             <div className="flex items-center justify-center mb-6">
-            <Image src={logo} alt='text' className='w-[9rem]' />
-             
+              <Image src={logo} alt='text' className='w-[9rem]' />
+
             </div>
             <h3 className="text-xl font-bold mb-4 text-center">Log In</h3>
             <p className="text-gray-600 mb-6">Start connecting with influencers and clients</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="email" className="block font-bold mb-2">Email</label>
                 <input
                   id="email"
                   type="email"
+                  name='email'
+                  value={userData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email address"
                   className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-green-300"
                 />
@@ -41,6 +77,9 @@ const LoginPage: React.FC = () => {
                   <input
                     id="password"
                     type="password"
+                    name='password'
+                    value={userData.password}
+                    onChange={handleChange}
                     placeholder="Enter a strong password"
                     className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-green-300"
                   />
@@ -50,7 +89,7 @@ const LoginPage: React.FC = () => {
                     </button>
                   </div>
                 </div>
-                <Link href="/Register" className='text-m text-right float-right text-green-500 cursor-pointer underline my-3'>I Don't Have An Accout</Link>
+                <Link href="/Register" className='text-m text-right float-right text-green-500 cursor-pointer underline my-3'>I Don&apos;t Have An Accout</Link>
               </div>
               <button
                 type="submit"
@@ -61,7 +100,7 @@ const LoginPage: React.FC = () => {
             </form>
           </div>
         </div>
-       
+
       </div>
     </div>
   );
