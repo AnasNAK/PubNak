@@ -44,7 +44,7 @@ export const LoginUser = createAsyncThunk<ResponseType, UserLog>(
       document.cookie = `token_admin=${encodedToken}; path=/`;
 
       
-      window.location.href = 'https://pubnak-dash-3qwwwjao7-anasnaks-projects.vercel.app';
+      window.location.href = 'https://pubnak-dash.vercel.app/';
 
     }if(response.code === 200){
       const encodedToken = encodeURIComponent(response.access_token);
