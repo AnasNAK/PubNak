@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-function navbar(props) {
+const navbar : React.FC =(props) => {
     return (
         <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
           <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -16,7 +16,7 @@ function navbar(props) {
                 </button>
                 <a href="#" className="flex ms-2 md:me-24">
                 
-                  <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">UR HEALTH</span>
+                  <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">PubNak</span>
                 </a>
               </div>
    

@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Implementation\UserRepository;
 use App\Repositories\implementation\CategoryRepository;
-use App\Repositories\implementation\PostRepository;
+use App\Repositories\Implementation\PostRepository;
 use App\Repositories\interface\UserRepositoryInterface;
 use App\Repositories\interface\CategoryRepositoryInterface;
 use App\Repositories\interface\PostRepositoryInterface;
@@ -29,3 +29,4 @@ class RepositoryServiceProvider extends ServiceProvider
         app()->bind(PostRepositoryInterface::class,PostRepository::class);
     }
 }
+    

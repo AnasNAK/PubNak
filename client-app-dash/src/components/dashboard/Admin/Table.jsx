@@ -5,19 +5,12 @@ import './Table.module.css';
 function Table(data) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    // const handleDeleteClick = () => {
-    //     setShowDeleteModal(true);
-    // };
+
 
     const handleCloseModal = () => {
         setShowDeleteModal(false);
     };
 
-    // const handleConfirmDelete = () => {
-       
-    //     console.log('Item deleted!');
-    //     handleCloseModal(); 
-    // };
 
     return (
         <div className='bg-gradient-to-r from-[#49a09d] to-[#5f2c82] mx-auto pl-0 sm:pl-44'>

@@ -21,7 +21,7 @@ public function __construct(public PostServiceInterface $service){
     {
        
         return $this->sendResponse(
-            messgae:"Posts lists",
+            message:"Posts lists",
             result: $this->service->all()
         );
     }
@@ -41,45 +41,45 @@ public function __construct(public PostServiceInterface $service){
          );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(Post $post)
+    // {
       
-        return $this->sendResponse(
-            message: "Post is listed with success",
-            result: $post,
-        );
-    }
+    //     return $this->sendResponse(
+    //         message: "Post is listed with success",
+    //         result: $post,
+    //     );
+    // }
 
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( Post $post ,UpdatePostRequest $request)
-    {
-        $post = $this->service->update($post ,$request);
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update( Post $post ,UpdatePostRequest $request)
+    // {
+    //     $post = $this->service->update($post ,$request);
 
-        return $this->sendResponse(
-            message:"Post updated successsfully",
-            result:$post,
-            code:202
-        );
+    //     return $this->sendResponse(
+    //         message:"Post updated successsfully",
+    //         result:$post,
+    //         code:202
+    //     );
         
 
-    }
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        return $this->sendResponse(
-            message:"Post deleted with success",
-            result: $this->service->delete($post)
-        );
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(Post $post)
+    // {
+    //     return $this->sendResponse(
+    //         message:"Post deleted with success",
+    //         result: $this->service->delete($post)
+    //     );
      
 
-    }
+    // }
 }

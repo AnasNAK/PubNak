@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\implementation;
+namespace App\Services\Implementation;
 
 use app\Models\Post;
-use app\Http\Request\StorePostRequest;
+use App\Http\Requests\StorePostRequest;
 use app\Http\Request\UpdatePostRequest;
-use app\Services\contract\PostServiceInterface;
-use app\Repositories\interface\PostRepositoryInterface;
+use App\Services\contract\PostServiceInterface;
+use App\Repositories\interface\PostRepositoryInterface;
 
 
 class PostService implements PostServiceInterface {
@@ -24,19 +24,19 @@ public function store(StorePostRequest $request){
    return $this->Repository->store($request);
 }
 
-public function show(Post $category){
-    return $this->Repository->show($category);
+// public function show(Post $category){
+//     return $this->Repository->show($category);
 
-}
+// }
 
-public function update(Post $category, UpdatePostRequest $request)
-{
-    return $this->Repository->update($category, $request);
-}
+// public function update(Post $category, UpdatePostRequest $request)
+// {
+//     return $this->Repository->update($category, $request);
+// }
 
-public function delete(Post $category){
-    return $this->Repository->delete($category);
-}
+// public function delete(Post $category){
+//     return $this->Repository->delete($category);
+// }
 
 
 
