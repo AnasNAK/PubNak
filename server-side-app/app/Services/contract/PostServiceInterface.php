@@ -9,6 +9,16 @@ use App\Http\Requests\UpdatePostRequest;
 
 interface PostServiceInterface {
 
-
     
+    public function all();
+
+    public function store(StorePostRequest $request);
+
+    public function show(Post $category);
+
+    public function update(Post $category ,UpdatePostRequest $request);
+
+    public function delete(Post $category);
+
+
 }

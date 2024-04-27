@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
+use App\Services\contract\PostServiceInterface;
 
 class PostController extends BaseApiController
 {
+public function __construct(public PostServiceInterface $service){
+
+}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->sendResponse(
+            messgae:"Posts lists",
+            result: $this->service->all()
+        );
     }
 
     /**
