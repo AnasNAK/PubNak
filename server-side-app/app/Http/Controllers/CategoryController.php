@@ -12,14 +12,17 @@ use Illuminate\Http\Request;
 class CategoryController extends BaseApiController
 {
 public function __construct(public CategoryServiceInterface $service){
+    
 
 }
+
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+   
         return $this->sendResponse(
             message: "category list",
             result: $this->service->all()

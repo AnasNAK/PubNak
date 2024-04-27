@@ -9,7 +9,7 @@ use App\Http\Requests\UpdatePostRequest;
 
 interface PostServiceInterface {
 
-    
+
     public function all();
 
     public function store(StorePostRequest $request);

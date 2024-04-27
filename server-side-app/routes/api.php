@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -16,6 +17,7 @@ Route::prefix('auth')->group(function () {
 
 
 Route::apiResource('category',CategoryController::class);
+Route::apiResource('post',PostController::class);
 
 
 

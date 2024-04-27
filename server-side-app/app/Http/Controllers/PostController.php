@@ -19,57 +19,67 @@ public function __construct(public PostServiceInterface $service){
      */
     public function index()
     {
+       
         return $this->sendResponse(
             messgae:"Posts lists",
             result: $this->service->all()
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+         $post = $this->service->store($request);
+
+         return $this->sendResponse(
+            message: "Post created successfully",
+            result: $post,
+            code:201
+         );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+      
+        return $this->sendResponse(
+            message: "Post is listed with success",
+            result: $post,
+        );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update( Post $post ,UpdatePostRequest $request)
     {
-        //
+        $post = $this->service->update($post ,$request);
+
+        return $this->sendResponse(
+            message:"Post updated successsfully",
+            result:$post,
+            code:202
+        );
+        
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        return $this->sendResponse(
+            message:"Post deleted with success",
+            result: $this->service->delete($post)
+        );
+     
+
     }
 }

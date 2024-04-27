@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Services\Implementation\UserService;
-use App\Services\Implementation\PostService;
+use App\Services\implementation\PostService;
 use App\Services\contract\UserServiceInterface;
 use App\Services\Implementation\CategoryService;
 use App\Services\contract\CategoryServiceInterface;
@@ -32,4 +32,4 @@ class ServiceServiceProvider extends ServiceProvider
         app()->bind(PostServiceInterface::class, PostService::class);
 
     }
-}
+}       

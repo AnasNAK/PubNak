@@ -9,7 +9,7 @@ use app\Services\contract\PostServiceInterface;
 use app\Repositories\interface\PostRepositoryInterface;
 
 
-class PostService implements PostServiceInterface{
+class PostService implements PostServiceInterface {
 
 public function __construct(public PostRepositoryInterface $Repository){
     

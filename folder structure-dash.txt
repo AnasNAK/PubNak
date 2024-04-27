@@ -10,14 +10,14 @@ src/
 |       |-- Client/      
 |       |-- Admin/       
 |       |-- Influencer/  
-|-- containers/          # Higher-level components that combine multiple components
-|   |-- Dashboard/       # Dashboard container components
-|       |-- Client/      # Container components for client dashboard
-|       |-- Admin/       # Container components for admin dashboard
-|       |-- Influencer/  # Container components for influencer dashboard
-|-- layouts/             # Layout components (e.g., header, footer)
-|-- services/            # API service integration (e.g., Axios instances)
-|   |-- api/             # API service functions
-|-- utils/               # Utility functions
-|-- App.js               # Root component
+|-- containers/          
+|   |-- Dashboard/       
+|       |-- Client/      
+|       |-- Admin/       
+|       |-- Influencer/  
+|-- layouts/             
+|-- services/            
+|   |-- api/             
+|-- utils/               
+|-- App.js              
 |-- index.js 
