@@ -10,6 +10,10 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'category_id' => 'required',
+            // 'images'=> 'image|mimes:jpeg,png,jpg,gif|max:2048'
             
         ];
     }

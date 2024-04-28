@@ -1,55 +1,136 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const CategoryState = {
-  updateState: false,
   loading: false,
   categoryList: [],
   error: "",
-  response: "",
+  successMessage: "",
 };
-
-export const fetchCategory = createAsyncThunk(
-  "category/fetchCategory",
-  async () => {
-    try {
-      const response = await axios.get("http://localhost/api/category");
-      return response.data;
-    } catch (error) {
-      throw new Error("Failed to fetch categories");
-    }
-  }
-);
 
 const CategorySlice = createSlice({
   name: "Category",
   initialState: CategoryState,
   reducers: {
-    changeStateTrue: (state) => {
-      state.updateState = true;
+    fetchCategoryRequest: (state) => {
+      state.loading = true;
+      state.error = "";
+      state.successMessage = "";
     },
-    changeStateFalse: (state) => {
-      state.updateState = false;
+    fetchCategorySuccess: (state, action) => {
+      state.loading = false;
+      state.categoryList = Array.isArray(action.payload) ? action.payload : [];
     },
-    clearResponse: (state) => {
-      state.response = "";
+    fetchCategoryFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCategory.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchCategory.fulfilled, (state, action) => {
-        state.loading = false;
-        state.categoryList = action.payload; 
-      })
-      .addCase(fetchCategory.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message; 
-      });
+    addCategoryRequest: (state) => {
+      state.loading = true;
+      state.error = "";
+      state.successMessage = "";
+    },
+    addCategorySuccess: (state, action) => {
+      state.loading = false;
+      state.categoryList = [...state.categoryList, action.payload];
+      state.successMessage = "Category added successfully";
+    },
+    addCategoryFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    updateCategoryRequest: (state) => {
+      state.loading = true;
+      state.error = "";
+      state.successMessage = "";
+    },
+    updateCategorySuccess: (state, action) => {
+      state.loading = false;
+      state.categoryList = state.categoryList.map((category) =>
+        category.id === action.payload.id ? action.payload : category
+      );
+      state.successMessage = "Category updated successfully";
+    },
+    updateCategoryFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    deleteCategoryRequest: (state) => {
+      state.loading = true;
+      state.error = "";
+      state.successMessage = "";
+    },
+    deleteCategorySuccess: (state, action) => {
+      state.loading = false;
+      state.categoryList = state.categoryList.filter(
+        (category) => category.id !== action.payload
+      );
+      state.successMessage = "Category deleted successfully";
+    },
+    deleteCategoryFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
+export const {
+  fetchCategoryRequest,
+  fetchCategorySuccess,
+  fetchCategoryFailure,
+  addCategoryRequest,
+  addCategorySuccess,
+  addCategoryFailure,
+  updateCategoryRequest,
+  updateCategorySuccess,
+  updateCategoryFailure,
+  deleteCategoryRequest,
+  deleteCategorySuccess,
+  deleteCategoryFailure,
+} = CategorySlice.actions;
+
+export const fetchCategory = () => async (dispatch) => {
+  dispatch(fetchCategoryRequest());
+  try {
+    const response = await axios.get("http://localhost/api/category");
+    dispatch(fetchCategorySuccess(response.data.data));
+    console.log(response.data);
+  } catch (error) {
+    dispatch(fetchCategoryFailure(error.message));
+  }
+};
+
+export const addCategory = (categoryData) => async (dispatch) => {
+  dispatch(addCategoryRequest());
+  try {
+    const response = await axios.post("http://localhost/api/category", categoryData);
+    dispatch(addCategorySuccess(response.data));
+    dispatch(fetchCategory());
+  } catch (error) {
+    dispatch(addCategoryFailure(error.message));
+  }
+};
+
+export const updateCategory = (categoryData) => async (dispatch) => {
+  dispatch(updateCategoryRequest());
+  try {
+    const response = await axios.put(`http://localhost/api/category/${categoryData.id}`, categoryData);
+    dispatch(updateCategorySuccess(response.data));
+    dispatch(fetchCategory());
+  } catch (error) {
+    dispatch(updateCategoryFailure(error.message));
+  }
+};
+
+export const deleteCategory = (categoryId) => async (dispatch) => {
+  dispatch(deleteCategoryRequest());
+  try {
+    await axios.delete(`http://localhost/api/category/${categoryId}`);
+    dispatch(deleteCategorySuccess(categoryId));
+    dispatch(fetchCategory());
+  } catch (error) {
+    dispatch(deleteCategoryFailure(error.message));
+  }
+};
+
 export default CategorySlice.reducer;
-export const { changeStateTrue, changeStateFalse, clearResponse } = CategorySlice.actions;

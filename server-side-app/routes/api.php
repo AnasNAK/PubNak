@@ -12,6 +12,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('users', [AuthController::class, 'users']);
     // Route::post('me', [AuthController::class, 'me']);
 });
 

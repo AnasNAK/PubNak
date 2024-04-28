@@ -17,7 +17,9 @@ return new class extends Migration
             $table->text('content');
             $table->boolean('status')->default(false);
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); // Add foreign key constraint
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); 
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade'); 
             $table->timestamps();
         });
         

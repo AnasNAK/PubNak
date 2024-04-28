@@ -15,6 +15,10 @@ use App\Http\Requests\RegisterUserRequest;
 class AuthController extends BaseApiController
 {
 
+    public function users(){
+        $users = User::all();
+        return $users;
+    }
 
 
     public function login(LoginUserRequest $request)
