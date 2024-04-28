@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 interface UserCredential {
   name: string;
@@ -35,24 +36,16 @@ export const LoginUser = createAsyncThunk<ResponseType, UserLog>(
   async (UserLog: UserLog) => {
     const request = await axios.post(`http://localhost/api/auth/login`, UserLog);
     const response = await request.data;
+    const Token = response.access_token;
+    Cookies.set('token', Token, { expires: 7 });
     if (response.code === 207) {
 
-
-
-      const encodedToken = encodeURIComponent(response.access_token);
-
-      document.cookie = `token_admin=${encodedToken}; path=/`;
-
-      
-      window.location.href = 'https://pubnak-dash.vercel.app/';
-
-    }if(response.code === 200){
-      const encodedToken = encodeURIComponent(response.access_token);
-
-      document.cookie = `token_user=${encodedToken}; path=/`;
-      
+      // window.location.href = 'https://pubnak-dash.vercel.app/';
+      window.location.href = 'http://localhost:5173/';
 
     }
+    // if(response.code === 200){
+    // }
 
     return response;
   }
