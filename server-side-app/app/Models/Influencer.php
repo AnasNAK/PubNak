@@ -26,4 +26,10 @@ class Influencer extends User
     {
         return $this->belongsToMany(Post::class, 'influencer_post');
     }
+
+
+    public function client()
+   {
+    return $this->belongsToMany(Client::class, 'client_influencer_feedback');
+   } 
 }

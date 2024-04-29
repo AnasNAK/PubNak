@@ -7,7 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use app\Http\Requests\UpdatePostRequest;
 use App\Services\contract\PostServiceInterface;
 use App\Repositories\interface\PostRepositoryInterface;
-
+use Illuminate\Http\Request;
 
 class PostService implements PostServiceInterface {
 
@@ -37,6 +37,18 @@ public function update(Post $category, UpdatePostRequest $request)
 public function delete(Post $post){
     return $this->Repository->delete($post);
 }
+
+public function MyPosts(Request $request){
+    return $this->Repository->MyPosts( $request);
+}
+public function addFav( Post $post ,Request $request){
+    return $this->Repository->addFav( $post ,$request);
+}
+public function myFav(Request $request){
+    return $this->Repository->myFav( $request);
+}
+
+
 
 
 

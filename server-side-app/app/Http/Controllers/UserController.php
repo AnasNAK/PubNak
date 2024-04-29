@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreContactRequest;
 
 class UserController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function contactUs(StoreContactRequest $request)
     {
-        //
-    }
+        $validatedData =  $request->validated();
+
+        $contact = Contact::create($validatedData);
+
+        return  $contact;
+     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function delete(Contact $contact)
     {
-        //
+        $post = Contact::findOrFail($contact->id);
+
+        $post->status = false;
+
+        $post->save();
+
+        return ['message' => 'Post status updated successfully'];
     }
 
     /**

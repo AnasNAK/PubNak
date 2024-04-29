@@ -3,18 +3,22 @@
 namespace App\Repositories\Implementation;
 
 use App\Models\Post;
+use App\Traits\getUserId;
+use App\Models\Influencer;
+use App\Traits\ImageUpload;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Repositories\interface\PostRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\UnauthorizedException;
+use App\Repositories\interface\PostRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Traits\ImageUpload;
 
 class PostRepository implements PostRepositoryInterface {
 
+    use getUserId ,ImageUpload;
 
-    use ImageUpload;
 
     public function all(){
 
@@ -33,8 +37,13 @@ class PostRepository implements PostRepositoryInterface {
 
     public function store(StorePostRequest $request)
     {
+               $userId = $this->getUser($request);
+          
             try {
-                $post = Post::create($request->validated());
+                $validatedData = $request->validated();
+               $validatedData['client_id'] = $userId;
+           
+                $post = Post::create($validatedData);
 
                 if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $image) {
@@ -42,7 +51,7 @@ class PostRepository implements PostRepositoryInterface {
                     }
                 }
                 
-                return $post;
+                return  $post;
             } catch (\Exception $e) {
                 throw new \RuntimeException("Error creating Post: " . $e->getMessage());
             }
@@ -85,7 +94,41 @@ class PostRepository implements PostRepositoryInterface {
         return ['message' => 'Post status updated successfully'];
     }
 
+    public function MyPosts(Request $request )
+    {
+
+        $userId = $this->getUser( $request);
+
+        $posts = Post::where('client_id',$userId)->with('category')->get();
 
 
+        return $posts;
+    }
+
+
+
+    public function addFav(Post $post, Request $request)
+    {
+        $userId = $this->getUser($request);
+    
+        $influencer = Influencer::find($userId);
+    
+        if (!$influencer) {
+            return response()->json(['error' => 'Influencer not found'], 404);
+        }
+    
+        $influencer->post()->toggle($post->id);
+    
+        return response()->json(['message' => 'Favorite status toggled successfully']);
+    }
+    public function myFav(Request $request)
+    {
+        $userId = $this->getUser($request);
+    
+        $influencer = Influencer::find($userId);
+        $favPosts = $influencer->post->load('client','category');
+    
+        return $favPosts;
+    }
 
 }

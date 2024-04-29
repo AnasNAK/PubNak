@@ -22,4 +22,9 @@ class Client extends User
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+
+    public function influencer(){
+        return $this->belongsToMany(Influencer::class ,'client_influencer_feedback');
+    }
 }

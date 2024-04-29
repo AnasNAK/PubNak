@@ -81,4 +81,30 @@ public function __construct(public PostServiceInterface $service){
         
 
         }
+
+        public function MyPosts(Request $request){
+          
+
+            return $this->sendResponse(
+                message:"listed my posts with success",
+                result: $this->service->MyPosts($request)
+
+            );
+        }
+
+
+        public function addFav( Post $post ,Request $request){
+        return $this->sendResponse(
+            message:"added to list fav with success",
+            result: $this->service->addFav($post,$request)
+        );
+
+        }
+        public function myFav(Request $request){
+        return $this->sendResponse(
+            message:" list myfav with success",
+            result: $this->service->myFav($request)
+        );
+
+        }
 }

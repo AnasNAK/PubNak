@@ -41,12 +41,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'Influencer'
         ]);
 
-            // Post::factory()->create([
-            //     'title' => 'telecome',
-            //     'content' => 'this content made by anas nak and that person is me ',
-            //     'category_id' => 2
+            Post::factory()->create([
+                'title' => 'telecome',
+                'content' => 'this content made by anas nak and that person is me ',
+                'category_id' => 2,
+                'client_id'=> 1
 
-            // ]);
+            ]);
 
     }
 }

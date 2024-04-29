@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_influencer_feedback', function (Blueprint $table) {
-            $table->id();
+
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('influencer_id');
             $table->text('comment');

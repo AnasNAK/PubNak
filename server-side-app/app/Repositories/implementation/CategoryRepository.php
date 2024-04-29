@@ -3,21 +3,31 @@
 namespace App\Repositories\implementation;
 
 use App\Models\Category;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Repositories\interface\CategoryRepositoryInterface;
 
+// use App\Traits\getUserId;
+
 class CategoryRepository implements CategoryRepositoryInterface
 {
+    // use getUserId;
+
     public function all()
     {
         return Category::all();
     }
 
+ 
     public function store(StoreCategoryRequest $request)
-    {
+    {  
+        
+    //    $userId = $this->getUser($request);
+
+      
         try {
             $category = Category::create($request->validated());
             return $category;
