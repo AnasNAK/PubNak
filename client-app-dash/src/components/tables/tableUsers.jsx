@@ -22,11 +22,10 @@ function UsersComponent() {
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Influencers</h2>
-      <div className="bg-light-green-200 border border-black rounded-lg p-4 mb-4">
+      <div className="bg-white border border-black rounded-lg p-4 mb-4">
         <table className="w-full">
           <thead>
             <tr className="bg-black text-white">
-              <th className="p-2">Profile Image</th>
               <th className="p-2">Name</th>
               <th className="p-2">Email</th>
               <th className="p-2">Instagram</th>
@@ -36,11 +35,7 @@ function UsersComponent() {
           <tbody>
             {influencers.map((influencer) => (
               <tr key={influencer.id}>
-                <td className="p-2">
-                  {influencer.profileImage && (
-                    <img src={influencer.profileImage} alt={influencer.name} className="w-10 h-10 rounded-full" />
-                  )}
-                </td>
+               
                 <td className="p-2">{influencer.name}</td>
                 <td className="p-2">{influencer.email}</td>
                 <td className="p-2">
@@ -71,7 +66,6 @@ function UsersComponent() {
         <table className="w-full">
           <thead>
             <tr className="bg-black text-white">
-              <th className="p-2">Profile Image</th>
               <th className="p-2">Name</th>
               <th className="p-2">Email</th>
             </tr>
@@ -79,11 +73,6 @@ function UsersComponent() {
           <tbody>
             {clients.map((client) => (
               <tr key={client.id}>
-                <td className="p-2">
-                  {client.profileImage && (
-                    <img src={client.profileImage} alt={client.name} className="w-10 h-10 rounded-full" />
-                  )}
-                </td>
                 <td className="p-2">{client.name}</td>
                 <td className="p-2">{client.email}</td>
               </tr>

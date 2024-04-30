@@ -1,12 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import AdminDashboardContainer from './containers/Dashboard/Admin/AdminDashboardContainer';
-
+import AppRouter from './router/'; 
 function App() {
   return (
-    <Router>
-      <Route path="/" component={AdminDashboardContainer} />
-    </Router>
+    <React.StrictMode>
+      <AppRouter />
+    </React.StrictMode>
   );
 }
 

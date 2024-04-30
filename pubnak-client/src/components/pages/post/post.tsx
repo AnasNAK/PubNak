@@ -1,4 +1,3 @@
-// src/pages/index.tsx
 import React from 'react';
 import Nvigation from '../../common/Navigation/Navigation';
 import Header from '../../layout/SideBar/SideBar';

@@ -3,6 +3,7 @@ import ContactContent from '../components/pages/contact/Contact'
 import Footer from '../components/layout/Footer/Footer'
 import Header from '../components/layout/Header/Header';
 import styles from '../styles/index.module.css';
+import withGuest from '@/utils/withGuest';
 
 
 const Contact: React.FC = () => {
@@ -14,4 +15,4 @@ const Contact: React.FC = () => {
         </div>
     )
 }
-export default Contact;
+export default withGuest(Contact , '/Posts');

@@ -3,6 +3,7 @@ import AboutContent from '../components/pages/about/About'
 import Footer from '../components/layout/Footer/Footer'
 import Header from '../components/layout/Header/Header';
 import styles from '../styles/index.module.css';
+import withGuest from '@/utils/withGuest';
 
  const About:React.FC = () => {
   return (
@@ -13,4 +14,4 @@ import styles from '../styles/index.module.css';
     </div>
   )
 }
-export default About;
+export default withGuest(About,'/Posts');

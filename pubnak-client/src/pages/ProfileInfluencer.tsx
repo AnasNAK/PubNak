@@ -1,6 +1,7 @@
 import ProfileOverview from '../components/pages/InfluencerProfilePage/ProfileOverview';
 import NavigationTabs from '../components/pages/InfluencerProfilePage/NavigationTabs';
 import ConnectionsList from '../components/pages/InfluencerProfilePage/ConnectionsList';
+import withAuth from '@/utils/withAuth';
 
 
 const ProfileInfluencer: React.FC = () => {
@@ -13,4 +14,4 @@ const ProfileInfluencer: React.FC = () => {
     )
 }
 
-export default ProfileInfluencer
+export default withAuth(ProfileInfluencer);

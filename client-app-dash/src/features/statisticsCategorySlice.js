@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from 'js-cookie'
+
 
 const CategoryStatisticsState = {
     loading: false,

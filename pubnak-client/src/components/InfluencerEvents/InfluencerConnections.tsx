@@ -5,13 +5,13 @@ import Image from 'next/image';
 interface InfluencerConnectionProps {
   name: string;
   role: string;
-  avatar: string;
+  // avatar: string;
 }
 
-const InfluencerConnection: React.FC<InfluencerConnectionProps> = ({ name, role, avatar }) => {
+const InfluencerConnection: React.FC<InfluencerConnectionProps> = ({ name, role }) => {  // 7ayedt avatar from props
   return (
     <div className="bg-white rounded-lg shadow-md p-4 flex items-center">
-      <Image src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" />
+      {/* <Image src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" /> */}
       <div>
         <h3 className="text-sm font-bold">{name}</h3>
         <p className="text-gray-500">{role}</p>
@@ -43,7 +43,7 @@ const InfluencerConnections: React.FC = () => {
             key={index}
             name={connection.name}
             role={connection.role}
-            avatar={connection.avatar}
+            // avatar={connection.avatar}
           />
         ))}
       </div>

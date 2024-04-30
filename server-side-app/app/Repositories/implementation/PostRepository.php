@@ -84,15 +84,16 @@ class PostRepository implements PostRepositoryInterface {
 
 
     public function delete(Post $post)
-    {
-        $post = Post::findOrFail($post->id);
+{
+    $post = Post::findOrFail($post->id);
 
-        $post->status = false;
+    $post->status = !$post->status;
 
-        $post->save();
+    $post->save();
 
-        return ['message' => 'Post status updated successfully'];
-    }
+    return ['message' => 'Post status updated successfully'];
+}
+
 
     public function MyPosts(Request $request )
     {

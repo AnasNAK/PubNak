@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer/Footer'
 import AboutSec from '../components/pages/HomePage/NavigateSection/NavigateSection'
 
 import HeroSection from '../components/pages/HomePage/HeroSection/HeroSection';
+import withGuest from '@/utils/withGuest';
 
 
 const HomePage: React.FC = () => {
@@ -20,4 +21,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default withGuest(HomePage,'/Posts');

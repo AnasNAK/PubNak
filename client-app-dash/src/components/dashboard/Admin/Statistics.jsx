@@ -5,7 +5,7 @@ import Users from '../../tables/tableUsers'
 
 function Statistics() {
     return (
-        <div className='grid grid-cols-5 '>
+        <div className='grid grid-cols-5 bg-gray-200 '>
 
             <div className='col-span-1'></div>
             <div className='col-span-4 '>

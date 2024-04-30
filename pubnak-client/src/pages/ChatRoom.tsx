@@ -2,14 +2,15 @@
 
 import React from 'react';
 import RootLayout from '../components/layout/RootLayout'; 
+import withAuth from '../utils/withAuth';
 
 const ChatRoom: React.FC = () => {
   return (
-    <RootLayout> {/* Use RootLayout as the layout component */}
+    <RootLayout>
       <div>
         <h1>Chat Room</h1>
         <div>
-          {/* Chat messages will be displayed here */}
+        
         </div>
         <form>
           <input type="text" placeholder="Type your message..." />
@@ -20,4 +21,4 @@ const ChatRoom: React.FC = () => {
   );
 };
 
-export default ChatRoom;
+export default withAuth(ChatRoom);

@@ -3,6 +3,8 @@ import Navbar from '@/components/dashboard/influencer/Navbar';
 import SideBar from '@/components/dashboard/influencer/SideBar';
 import Profile from '@/components/dashboard/influencer/Profile';
 import Table from '@/components/dashboard/influencer/Table';
+import withAuth from '@/utils/withAuth';
+
 
 const DashInfluencer: React.FC = () => {
     const [selectedOption, setSelectedOption] = useState('profile');
@@ -17,4 +19,4 @@ const DashInfluencer: React.FC = () => {
     );
 };
 
-export default DashInfluencer;
+export default withAuth(DashInfluencer);

@@ -4,14 +4,14 @@ import Image from 'next/image';
 import Logo from '../../../../public/images/logo-filerouge-white 1.png'
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { RegisterUser } from '@/features/userSlice'; 
+import { RegisterUser } from '@/features/userSlice';
 import { RootState, AppDispatch } from '@/store/store';
 
 interface SignUpSectionProps { }
 
 const SignUpSection: React.FC<SignUpSectionProps> = () => {
 
-  const { loading, error } = useSelector((state: RootState) => state.user); 
+  const { loading, error } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
 
   const [formData, setFormData] = useState({
@@ -20,6 +20,8 @@ const SignUpSection: React.FC<SignUpSectionProps> = () => {
     password: '',
     role: 'Influencer'
   });
+
+  const [showPassword, setshowPassword] = useState(false);
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +32,13 @@ const SignUpSection: React.FC<SignUpSectionProps> = () => {
     e.preventDefault();
     dispatch(RegisterUser(formData))
   };
+
+  const togglePasswordVisibility =  () =>{
+
+    setshowPassword(prevState => !prevState)
+
+  }
+
 
   return (
     <div className={`${styles.bodyOverlay} flex justify-center items-center h-screen `}>
@@ -45,8 +54,21 @@ const SignUpSection: React.FC<SignUpSectionProps> = () => {
           <div className="mb-4">
             <input type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring  focus:ring-green-300" />
           </div>
-          <div className="mb-4">
-            <input type="password" name="password" placeholder="Set up your password" value={formData.password} onChange={handleChange} className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-green-300" />
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter a strong password"
+              className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-green-300"
+            />
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <button type="button" className="text-gray-500 hover:text-gray-700" onClick={togglePasswordVisibility}>
+                <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+              </button>
+            </div>
           </div>
 
           <div className="mb-4 flex items-center">
