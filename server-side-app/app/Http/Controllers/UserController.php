@@ -25,13 +25,13 @@ class UserController extends BaseApiController
      */
     public function delete(Contact $contact)
     {
-        $post = Contact::findOrFail($contact->id);
+        $contact = Contact::findOrFail($contact->id);
 
-        $post->status = false;
+        $contact->status = false;
 
-        $post->save();
+        $contact->save();
 
-        return ['message' => 'Post status updated successfully'];
+        return ['message' => 'contact status updated successfully'];
     }
 
     /**

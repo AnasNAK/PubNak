@@ -107,4 +107,15 @@ public function __construct(public PostServiceInterface $service){
         );
 
         }
+
+
+        public function postStatistics(){
+
+            $Statistics = $this->service->Statistics();
+            return $this->sendResponse(
+
+                message: "Statistics received successfully",
+                result: $Statistics
+            );
+        }
 }

@@ -27,6 +27,8 @@ interface PostServiceInterface {
 
     public function myFav(Request $request);
 
+    public function Statistics();
+
 
 
 }

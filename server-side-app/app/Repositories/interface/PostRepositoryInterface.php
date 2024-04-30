@@ -27,6 +27,8 @@ interface PostRepositoryInterface{
 
     public function myFav(Request $request);
 
+    public function Statistics();
+
 
 
 }

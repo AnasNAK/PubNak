@@ -13,6 +13,8 @@ class Influencer extends User
         'email',
         'password',
         'role',
+        'instagram',
+        'youtube'
 
     ];
 

@@ -16,7 +16,11 @@ class AuthController extends BaseApiController
 {
 
     public function users(){
-        $users = User::all();
+        $users = [
+            'influencers' => Influencer::with('profileImage')->get(),
+            'clients' => Client::with('profileImage')->get(),
+        ];
+    
         return $users;
     }
 

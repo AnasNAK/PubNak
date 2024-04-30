@@ -49,6 +49,10 @@ public function myFav(Request $request){
 }
 
 
+ public function Statistics(){
+
+    return $this->Repository->Statistics();
+ }
 
 
 

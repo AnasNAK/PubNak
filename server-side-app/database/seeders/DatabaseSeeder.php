@@ -20,28 +20,31 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Category::factory(5)->create();
+        // Category::factory(5)->create();
 
-        Client::factory()->create([
-            'name' => 'Client',
-            'email' => 'client@client.com',
-            'password' => 'client',
-            'role' => 'Client'
-        ]);
-        Admin::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => 'admin',
-            'role' => 'Admin'
-        ]);
-        Influencer::factory()->create([
-            'name' => 'Influencer',
-            'email' => 'influencer@influencer.com',
-            'password' => 'influencer',
-            'role' => 'Influencer'
-        ]);
+        // Client::factory()->create([
+        //     'name' => 'Client',
+        //     'email' => 'client@client.com',
+        //     'password' => 'client',
+        //     'role' => 'Client'
+        // ]);
+        // Admin::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => 'admin',
+        //     'role' => 'Admin'
+        // ]);
+        // Influencer::factory()->create([
+        //     'name' => 'Influencer',
+        //     'email' => 'influencer@influencer.com',
+        //     'password' => 'influencer',
+        //     'role' => 'Influencer',
+        //     'instagram'=>'https://www.instagram.com/anas__nak/',
+        //     'youtube' => 'https://www.youtube.com/@Laracastsofficial'
 
-            Post::factory()->create([
+        // ]);
+
+            Post::factory(3)->create([
                 'title' => 'telecome',
                 'content' => 'this content made by anas nak and that person is me ',
                 'category_id' => 2,

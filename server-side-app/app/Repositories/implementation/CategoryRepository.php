@@ -71,4 +71,28 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
       
     }
+
+    public function getCategoryStatistics()
+    {
+        try{
+            $categories = Category::withCount('posts')->get();
+            $categoryStatistics = $categories->map(function ($category) {
+                return [
+                    'name' => $category->name,
+                    'postCount' => $category->posts_count,
+                ];
+            });
+
+
+            return $categoryStatistics;
+
+        
+        }catch(ModelNotFoundException $e){
+            throw new \RuntimeException("Error fetching Category: " . $e->getMessage());
+
+        }
+      
+    }
+
+    
 }

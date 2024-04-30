@@ -94,7 +94,7 @@ export const fetchCategory = () => async (dispatch) => {
   try {
     const response = await axios.get("http://localhost/api/category");
     dispatch(fetchCategorySuccess(response.data.data));
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     dispatch(fetchCategoryFailure(error.message));
   }

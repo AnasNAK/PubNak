@@ -36,6 +36,9 @@ class CategoryService implements CategoryServiceInterface {
     public function delete(Category $category){
         return $this->Repository->delete($category);
     }
+    public function getCategoryStatistics(){
+        return $this->Repository->getCategoryStatistics();
+    }
 
 
 

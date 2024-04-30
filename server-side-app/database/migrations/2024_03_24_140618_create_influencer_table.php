@@ -15,6 +15,8 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("CREATE TABLE influencers () INHERITS(users)");
+        DB::statement("ALTER TABLE influencers ADD COLUMN instagram VARCHAR(255) NULL");
+        DB::statement("ALTER TABLE influencers ADD COLUMN youtube VARCHAR(255) NULL");
         DB::statement("ALTER TABLE  influencers ADD CONSTRAINT  influencers_id_unique UNIQUE (id);");
     }
 

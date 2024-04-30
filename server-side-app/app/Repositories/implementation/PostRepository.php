@@ -131,4 +131,16 @@ class PostRepository implements PostRepositoryInterface {
         return $favPosts;
     }
 
+
+    public function Statistics(){
+
+        $statistics = Post::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        ->groupBy('date')
+        ->get();
+
+    return $statistics;
+        
+
+    }
+
 }

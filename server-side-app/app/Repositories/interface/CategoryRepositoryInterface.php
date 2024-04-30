@@ -17,6 +17,8 @@ interface CategoryRepositoryInterface {
     public function update( Category $category , UpdateCategoryRequest $request );
 
     public function delete(Category $category);
+    
+    public function getCategoryStatistics();
 
 
 }

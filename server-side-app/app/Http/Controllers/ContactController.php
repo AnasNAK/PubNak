@@ -8,6 +8,48 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
+    public function contactUs(StoreContactRequest $request)
+    {
+        $validatedData =  $request->validated();
+
+        $contact = Contact::create($validatedData);
+
+        return  $contact;
+     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function delete(Contact $contact)
+    {
+        $contact = Contact::findOrFail($contact->id);
+
+        $contact->status = false;
+
+        $contact->save();
+
+        return ['message' => 'contact status updated successfully'];
+    }
+
+    public function all()
+    {
+        $contact = Contact::latest()->get();
+
+
+        return    $contact ;
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * Display a listing of the resource.
      */

@@ -12,6 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+
         DB::statement("CREATE TABLE clients () INHERITS(users)");
         DB::statement("ALTER TABLE  clients ADD CONSTRAINT  clients_id_unique UNIQUE (id);");    }
 

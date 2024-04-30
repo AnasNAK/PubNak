@@ -90,4 +90,15 @@ public function __construct(public CategoryServiceInterface $service){
         );
         
     }
+
+
+    public function getCategoryStatistics(){
+
+        $statisticsCat = $this->service->getCategoryStatistics();
+        return $this->sendResponse(
+            message: "category statistics listed with success",
+            result: $statisticsCat
+           
+        );
+    }
 }

@@ -3,13 +3,18 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+
+Route::post('contact',[ContactController::class,'contactUs']);
+Route::post('rmContact/{contact}',[ContactController::class,'delete']);
 
 
+Route::get('allContact',[ContactController::class,'all']);
 
-Route::post('contact',[UserController::class,'contactUs']);
 
 
 Route::prefix('auth')->group(function () {
@@ -29,3 +34,9 @@ Route::post('addFav/{post}', [PostController::class, 'addFav']);
 Route::get('myFav',[PostController::class, 'myFav']);
 
 
+Route ::post('feedback',[ClientController::class, 'feedback']);
+
+
+Route::get('postStatistics',[PostController::class, 'postStatistics']);
+
+Route::get('CatStatistics',[CategoryController::class, 'getCategoryStatistics']);
