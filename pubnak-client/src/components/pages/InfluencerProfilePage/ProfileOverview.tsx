@@ -4,7 +4,7 @@ import profilPic from '../../../../public/images/nak.jpg'
 
 const ProfileOverview: React.FC = () => {
   return (
-    <div className="bg-white py-8">
+    <div className="bg-gray-400 py-8">
       <div className="container mx-auto flex flex-col items-center">
         <div className="relative">
           <Image

@@ -4,17 +4,17 @@ import Image from 'next/image';
 
 interface ConnectionProps {
   name: string;
-  imageSrc: string;
+  // imageSrc: string;
 }
 
-const Connection: React.FC<ConnectionProps> = ({ name, imageSrc }) => {
+const Connection: React.FC<ConnectionProps> = ({ name,  }) => { // imageSrc
   return (
     <div className="flex items-center mb-2">
-      <Image
+      {/* <Image
         src={imageSrc}
         alt={name}
         className="w-8 h-8 rounded-full mr-2"
-      />
+      /> */}
       <span>{name}</span>
     </div>
   );
@@ -33,7 +33,7 @@ const ConnectionsList: React.FC = () => {
         <Connection
           key={index}
           name={connection.name}
-          imageSrc={connection.imageSrc}
+          // imageSrc={connection.imageSrc}
         />
       ))}
     </div>

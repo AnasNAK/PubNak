@@ -6,34 +6,44 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RegisterUser } from '@/features/userSlice';
 import { RootState, AppDispatch } from '@/store/store';
+import { useRouter } from 'next/router';
 
 interface SignUpSectionProps { }
 
 const SignUpSection: React.FC<SignUpSectionProps> = () => {
 
-  const { loading, error } = useSelector((state: RootState) => state.user);
+  const { isLoading, error } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    role: 'Influencer'
+    role: ''
   });
 
   const [showPassword, setshowPassword] = useState(false);
+  const router = useRouter();
 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(RegisterUser(formData))
+    
+    
+      .then(() => {
+        router.push('/Posts');
+      })
+      .catch(error => {
+        console.error('Error occurred during login:', error);
+      });
   };
 
-  const togglePasswordVisibility =  () =>{
+  const togglePasswordVisibility = () => {
 
     setshowPassword(prevState => !prevState)
 
@@ -53,6 +63,18 @@ const SignUpSection: React.FC<SignUpSectionProps> = () => {
           </div>
           <div className="mb-4">
             <input type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring  focus:ring-green-300" />
+          </div>
+          <div className="mb-4">
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-green-300"
+            >
+              <option disabled >Select Role</option>
+              <option selected value="Client">Client</option>
+              <option value="Influencer">Influencer</option>
+            </select>
           </div>
           <div className="relative">
             <input

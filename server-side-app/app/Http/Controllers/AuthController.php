@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Client;
+use App\Traits\getUserId;
 use App\Models\Influencer;
+use App\Traits\ImageUpload;
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateProfileInfluencerRequest;
 
 class AuthController extends BaseApiController
 {
+
+    use getUserId ,ImageUpload ;
 
     public function users(){
         $users = [
@@ -45,10 +52,10 @@ class AuthController extends BaseApiController
     }
 
  
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
+    // public function me()
+    // {
+    //     return response()->json(auth()->user());
+    // }
 
     public function logout()
     {
@@ -75,11 +82,12 @@ class AuthController extends BaseApiController
          
 
             if($request->role === "Influencer"){
-
+                
                 
                 $user = Influencer::create($validatedData);
 
             }elseif($request->role === "Client"){
+               
                 $user = Client::create($validatedData);
 
             }else{
@@ -97,4 +105,92 @@ class AuthController extends BaseApiController
             return $this->sendError('Registration failed.', [$e->getMessage()]);
         }
     }
+
+
+    public function UpdateProfileClient(UpdateProfileRequest $request){
+    
+
+        $userId = $this->getUser($request);
+    
+        $user = Client::findOrFail($userId);
+        
+        try{
+    
+            if ($request->filled('password')) {
+                $request['password'] = bcrypt($request['password']);
+            }
+    
+            $user->update($request->validated());
+    
+            if ($request->hasFile('image')) {
+                    $this->deleteImg($user);
+                    $this->storeImg($request->file('image'), $user);
+            }
+            
+            return $user->load('profileImage');
+    
+        } catch (\Exception $e){
+    
+            return $this->sendError('update profile failed.', [$e->getMessage()]);
+    
+        }
+    }
+    public function UpdateProfileInfluencer(UpdateProfileInfluencerRequest $request){
+
+        $userId = $this->getUser($request);
+    
+        $user = Influencer::findOrFail($userId);
+        try{
+    
+            if ($request->filled('password')) {
+                $request['password'] = bcrypt($request['password']);
+            }
+    
+            
+            $user->update($request->validated());
+    
+            if ($request->hasFile('image')) {
+                $this->deleteImg($user);
+                foreach ($request->file('image') as $image) {
+                    $this->storeImg($image, $user);
+                }
+            }
+            
+            return $user->load('profileImage');
+    
+        } catch (\Exception $e){
+    
+            return $this->sendError('update profile failed.', [$e->getMessage()]);
+    
+        }
+    }
+    
+
+
+    public function  FindMe(Request $request)
+    {
+
+        $userId = $this->getUser($request);
+
+        $user = User::FindOrFail($userId);
+            if($user['role'] === 'Client'){
+
+                $client = Client::with('profileImage')->FindOrFail($userId);
+
+          return $client;
+
+            
+            }elseif($user['role'] === 'Influencer'){
+
+                $influencer = Influencer::with('profileImage')->Find( $userId);
+
+              return $influencer;
+               
+            }else{
+                dd('you dont have a role you need to connect ');
+            }
+
+        
+    }
+    
 }

@@ -24,6 +24,10 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('users', [AuthController::class, 'users']);
     Route::post('me', [AuthController::class, 'me']);
+    Route::post('UpdateProfileClient', [AuthController::class, 'UpdateProfileClient']);
+    Route::post('UpdateProfileInfluencer', [AuthController::class, 'UpdateProfileInfluencer']);
+    Route::post('FindMe', [AuthController::class, 'FindMe']);
+
 });
 
 

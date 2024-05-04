@@ -9,14 +9,20 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginUser } from '@/features/userSlice';
 import { RootState, AppDispatch } from '@/store/store';
+import { useRouter } from 'next/router';
+
 
 
 interface SignInSectionProps { }
 
 const LoginPage: React.FC<SignInSectionProps> = () => {
 
-  const { loading, error } = useSelector((state: RootState) => state.user);
+  const { isLoading, error } = useSelector((state: RootState) => state.user);
+  
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -34,13 +40,16 @@ const LoginPage: React.FC<SignInSectionProps> = () => {
 
     e.preventDefault();
     dispatch(LoginUser(userData))
+    .then(() => {
+      router.push('/Posts');
+    })
+    .catch(error => {
+      console.error('Error occurred during login:', error);
+    });
   };
   const togglePasswordVisibility = () => {
     setShowPassword(prevState => !prevState);
   };
-
-
-
 
 
   return (

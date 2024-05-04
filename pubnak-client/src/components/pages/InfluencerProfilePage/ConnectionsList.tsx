@@ -15,12 +15,12 @@ const ConnectionProfile: React.FC<ConnectionProfileProps> = ({
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="relative">
-        <Image
+        {/* <Image
           src={profilePicture}
           alt="Profile Picture"
           className="w-16 h-16 rounded-full"
         
-        />
+        /> */}
       </div>
       <h3 className="text-lg font-bold mt-2 text-black">Influencer Profile</h3>
       <p className="text-gray-500">{mutualConnections} mutual connections</p>

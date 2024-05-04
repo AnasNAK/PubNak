@@ -26,17 +26,15 @@ trait ImageUpload
 
     public function deleteImg(object $obj)
     {
-        if ($obj->images->isNotEmpty()) {
-
+        if ($obj->images !== null && $obj->images->isNotEmpty()) {
             foreach ($obj->images as $image) {
-        
                 Storage::delete('public/' . $image->path);
-                
-            
                 $image->delete();
             }
         }
     }
+    
+
     
     public function move($image)
     {

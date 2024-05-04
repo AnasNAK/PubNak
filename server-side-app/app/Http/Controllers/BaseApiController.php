@@ -9,7 +9,7 @@ class BaseApiController extends Controller
 {
     protected function respondWithToken($token, $name = null, $role = null , $code = 200)
     {
-        $ttl = JWTAuth::factory()->getTTL();
+        $ttl = 120;
         return response()->json([
             'name' => $name,
             'role' => $role,

@@ -23,21 +23,17 @@ const Navigation: React.FC = () => {
           </button>
         </div>
         <nav className="mt-10 px-6">
-          <Link href="/" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
+          <Link href="/Posts" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
             <FaHome />
             <span>Home</span>
           </Link>
-          <Link href="/inbox" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
+          <Link href="/Feed" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
             <FaInbox />
-            <span>Inbox</span>
+            <span>Feed</span>
           </Link>
-          <Link href="/chat" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
+          <Link href="/ChatRoom" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
             <FaCommentAlt />
             <span>Chat</span>
-          </Link>
-          <Link href="/connections" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
-            <FaUserFriends />
-            <span>20 connections</span>
           </Link>
           <Link href="/negotiations" className="flex items-center space-x-2 py-4 text-white hover:text-green-500">
             <FaBriefcase />

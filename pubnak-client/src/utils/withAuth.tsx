@@ -9,10 +9,15 @@ const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
     useEffect(() => {
       const checkAuth = async () => {
       
-        const isAuthenticated = await checkAuthentication();
-
-        if (!isAuthenticated) {
-          router.push('/Login'); 
+        try {
+          await checkAuthentication()
+          .then((isAuthenticated) => {
+            if (!isAuthenticated) {
+              router.push('/Login');
+            }
+          });
+        } catch (error) {
+          console.error('Authentication check error:', error);
         }
       };
 

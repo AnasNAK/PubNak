@@ -31,10 +31,7 @@ const InfluencerConnections: React.FC = () => {
 
   return (
     <div className="bg-gray-200 p-4 rounded-lg shadow-md fixed h-full right-0 mt-[-1rem] z-[-1]">
-      <div className='flex justify-between items-center'>
-        <h2 className="text-lg font-bold mb-4">Connections</h2>
-        <p className="text-gray-500 mb-4 text-right font-bold">20</p>
-      </div>
+    
       <h2 className="text-lg font-bold mb-4">Networks</h2>
 
       <div className="space-y-4">

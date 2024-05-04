@@ -13,10 +13,8 @@ const Profile: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Save the profile information and profile picture
         console.log('Profile Information:', userData);
         console.log('Profile Picture:', profilePicture);
-        // Here, you can perform the necessary actions to save the user data and profile picture
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

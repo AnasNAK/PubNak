@@ -48,29 +48,29 @@ const posts: React.FC = () => {
                             </div>
                             <div className='flex flex-col'>
 
-                             <div className='flex flex-col gap-1 '>
-                                <p className='font-bold'>Descripion</p>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                 Perspiciatis sint deserunt recusandae voluptatum asperiores
-                                  natus pariatur blan</p>
-                             </div>
-                                
+                                <div className='flex flex-col gap-1 '>
+                                    <p className='font-bold'>Descripion</p>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        Perspiciatis sint deserunt recusandae voluptatum asperiores
+                                        natus pariatur blan</p>
+                                </div>
+
 
                                 <div className="mt-4 grid grid-cols-5 gap-4">
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                           <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                 </div>
                             </div>
@@ -113,29 +113,29 @@ const posts: React.FC = () => {
                             </div>
                             <div className='flex flex-col'>
 
-                             <div className='flex flex-col gap-1 '>
-                                <p className='font-bold'>Descripion</p>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                 Perspiciatis sint deserunt recusandae voluptatum asperiores
-                                  natus pariatur blan</p>
-                             </div>
-                                
+                                <div className='flex flex-col gap-1 '>
+                                    <p className='font-bold'>Descripion</p>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        Perspiciatis sint deserunt recusandae voluptatum asperiores
+                                        natus pariatur blan</p>
+                                </div>
+
 
                                 <div className="mt-4 grid grid-cols-5 gap-4">
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                           <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                 </div>
                             </div>
@@ -178,29 +178,29 @@ const posts: React.FC = () => {
                             </div>
                             <div className='flex flex-col'>
 
-                             <div className='flex flex-col gap-1 '>
-                                <p className='font-bold'>Descripion</p>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                 Perspiciatis sint deserunt recusandae voluptatum asperiores
-                                  natus pariatur blan</p>
-                             </div>
-                                
+                                <div className='flex flex-col gap-1 '>
+                                    <p className='font-bold'>Descripion</p>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        Perspiciatis sint deserunt recusandae voluptatum asperiores
+                                        natus pariatur blan</p>
+                                </div>
+
 
                                 <div className="mt-4 grid grid-cols-5 gap-4">
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                    <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                          <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                     <div className=" rounded-lg p-4 text-center">
-                                           <Image src={heroImage} alt="Hero Image" />
+                                        <Image src={heroImage} alt="Hero Image" />
                                     </div>
                                 </div>
                             </div>
@@ -239,9 +239,9 @@ const posts: React.FC = () => {
                         </div> */}
                     </div>
                     <div className='col-span-2'>
-                       
+
                         <InfluencerConnections />
-                        
+
                     </div>
                 </div>
             </div>
