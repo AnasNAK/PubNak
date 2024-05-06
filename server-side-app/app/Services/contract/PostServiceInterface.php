@@ -12,12 +12,14 @@ interface PostServiceInterface {
 
 
     public function all();
+    
+    public function allPsts();
 
     public function store(StorePostRequest $request);
 
     public function show(Post $post);
 
-    public function update(Post $post ,UpdatePostRequest $request);
+    public function update(Request $request,Post $post);
 
     public function delete(Post $post);
 
@@ -28,6 +30,8 @@ interface PostServiceInterface {
     public function myFav(Request $request);
 
     public function Statistics();
+
+    public function assigned(Post $post , Request $request);
 
 
 

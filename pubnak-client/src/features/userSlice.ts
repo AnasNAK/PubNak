@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { Console } from "console";
-// import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
+// import { WritableDraft } from 'immer'; 
+
 
 interface UserCredential {
   name: string;
@@ -13,12 +12,14 @@ interface UserCredential {
 }
 
 interface ProfileUpdateData {
+  id?: number;
   name: string;
   email: string;
+  role:string;
   password: string;
   profile_image: string | File;
-  instagram:  string |undefined;
-  youtube:  string |undefined;
+  instagram: string | undefined;
+  youtube: string | undefined;
 }
 
 interface UserLog {
@@ -30,33 +31,60 @@ interface UserState {
   user: ProfileUpdateData | ResponseType;
   isLoggedIn: boolean;
   isLoading: boolean;
-  error: string | null |undefined;
+  error: string | null | undefined;
 }
 
 interface ResponseType {
+  id: number;
   name: string;
   role: string;
   email: string;
-  instagram:string,
+  instagram: string,
   youtube: string
-  profile_image :{}
+  profile_image: {}
 }
 
 const initialState: UserState = {
   user: {
+    id: undefined,
     name: '',
     email: '',
     password: '',
     profile_image: '',
-    instagram:'',
-    youtube: ''
+    instagram: '',
+    youtube: '',
+    role:''
   },
   isLoggedIn: false,
   isLoading: false,
-  error: null ,
+  error: null,
 };
 
-// const dispatch = useDispatch<AppDispatch>();
+
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = Cookies.get('token');
+      if (!token) {
+        throw new Error('Token not found in cookie');
+      }
+
+      const response = await axios.post('http://localhost/api/auth/logout', null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      Cookies.remove('token');
+
+      return response.data;
+    } catch (error) {
+      console.error('Logout failed:', error);
+      return rejectWithValue('Logout failed');
+    }
+  }
+);
 
 export const RegisterUser = createAsyncThunk<ResponseType, UserCredential>(
   'user/RegisterUser',
@@ -89,20 +117,47 @@ export const LoginUser = createAsyncThunk<ResponseType, UserLog>(
 );
 
 export const updateProfile = createAsyncThunk<ProfileUpdateData, FormData, { rejectValue: string }>(
-  "profile/update",
+  "profileClient/update",
   async (formData: FormData, { rejectWithValue }) => {
     try {
-      const token = Cookies.get('token'); 
+      const token = Cookies.get('token');
       if (!token) {
         throw new Error('Token not found in cookie');
       }
 
+      console.log(formData);
       const response = await axios.post(
         "http://localhost/api/auth/UpdateProfileClient",
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue('An error occurred');
+    }
+  }
+);
+export const updateProfileInfluencer = createAsyncThunk<ProfileUpdateData, FormData, { rejectValue: string }>(
+  "profileInfluencer/update",
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const token = Cookies.get('token');
+      if (!token) {
+        throw new Error('Token not found in cookie');
+      }
+
+      console.log(formData);
+      const response = await axios.post(
+        "http://localhost/api/auth/UpdateProfileInfluencer",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -115,20 +170,16 @@ export const updateProfile = createAsyncThunk<ProfileUpdateData, FormData, { rej
 );
 
 
-
-
-
-
 export const getUser = createAsyncThunk<ProfileUpdateData, string | undefined, { rejectValue: string }>(
   'user/getUser',
   async (token: string | undefined, { rejectWithValue }) => {
-    try {      
-      const response = await axios.post<ProfileUpdateData>('http://localhost/api/auth/FindMe',null, {
+    try {
+      const response = await axios.post<ProfileUpdateData>('http://localhost/api/auth/FindMe', null, {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
-      
+
       return response.data;
     } catch (error) {
       return rejectWithValue('Failed to fetch user data');
@@ -147,7 +198,6 @@ const UserSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         console.log(action.payload);
-        // console.log("Registered successfully");
       })
       .addCase(RegisterUser.pending, (state) => {
         state.isLoading = true;
@@ -182,17 +232,42 @@ const UserSlice = createSlice({
         state.isLoading = false;
         state.error = action.error ? String(action.error) : 'Something went wrong';
       })
+      .addCase(updateProfileInfluencer.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateProfileInfluencer.fulfilled, (state, action: PayloadAction<ProfileUpdateData>) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateProfileInfluencer.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error ? String(action.error) : 'Something went wrong';
+      })
       .addCase(getUser.pending, (state) => {
         state.isLoading = true;
-        state.error = null; 
+        state.error = null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; 
+        state.user = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.user = initialState.user; 
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload ? String(action.payload) : 'Logout failed';
       });
   },
 });

@@ -23,6 +23,11 @@ class Influencer extends User
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+    public function post_assigned()
+    {
+        return $this->hasMany(Post::class, 'assigned');
+    }
+   
 
     public function post()
     {
@@ -32,6 +37,6 @@ class Influencer extends User
 
     public function client()
    {
-    return $this->belongsToMany(Client::class, 'client_influencer_feedback');
+    return $this->belongsToMany(Client::class, 'client_influencer_feedback')->withPivot('rating', 'comment');
    } 
 }

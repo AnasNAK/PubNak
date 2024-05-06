@@ -1,13 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "@/features/userSlice";
+import userReducer from "@/features/userSlice";
 import categorySlice from "@/features/categorySlice";
 import postSlice from "@/features/postSlice";
+import postsListSlice from "@/features/postListSlice";
+import influencerSlice from "@/features/influencerSlice";
+import FavouritSlice from "@/features/FavouritSlice";
 
 const store = configureStore({
   reducer: {
-    user: userSlice,
+    user: userReducer,
     category: categorySlice,
     posts: postSlice,
+    postsList: postsListSlice,
+    influencers: influencerSlice,
+    favorites: FavouritSlice
   },
 });
 

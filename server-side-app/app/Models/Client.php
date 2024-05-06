@@ -25,6 +25,6 @@ class Client extends User
 
 
     public function influencer(){
-        return $this->belongsToMany(Influencer::class ,'client_influencer_feedback');
+        return $this->belongsToMany(Influencer::class ,'client_influencer_feedback')->withPivot('rating', 'comment');
     }
 }

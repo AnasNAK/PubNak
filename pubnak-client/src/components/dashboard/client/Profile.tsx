@@ -41,6 +41,7 @@ const Profile: React.FC = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        
         setUserData(prevUserData => ({
             ...prevUserData,
             name: user.name || '',

@@ -1,47 +1,47 @@
-import React from 'react';
-import Image from 'next/image';
-
-
-interface InfluencerConnectionProps {
-  name: string;
-  role: string;
-  // avatar: string;
-}
-
-const InfluencerConnection: React.FC<InfluencerConnectionProps> = ({ name, role }) => {  // 7ayedt avatar from props
-  return (
-    <div className="bg-white rounded-lg shadow-md p-4 flex items-center">
-      {/* <Image src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" /> */}
-      <div>
-        <h3 className="text-sm font-bold">{name}</h3>
-        <p className="text-gray-500">{role}</p>
-      </div>
-    </div>
-  );
-};
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { fetchRandomInfluencers } from '@/features/influencerSlice';
+import { AppDispatch, RootState } from '@/store/store';
 
 const InfluencerConnections: React.FC = () => {
-  const connections = [
-    { name: 'Influencer Name', role: 'Reviewing client posts', avatar: '/avatar1.png' },
-    { name: 'Client Name', role: 'Negotiating prices', avatar: '/avatar2.png' },
-    { name: 'Influencer Name', role: 'Negotiating prices', avatar: '/avatar3.png' },
-    { name: 'Client Name', role: 'Negotiating prices', avatar: '/avatar4.png' },
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const { influencers } = useSelector((state: RootState) => state.influencers);
 
-  ];
+  useEffect(() => {
+    dispatch(fetchRandomInfluencers());
+  }, [dispatch]);
+
+  const handleInfluencerClick = (id: number) => {
+    router.push({
+      pathname: '/ProfileInfluencer',
+      query: { id: id },
+    });
+  };
 
   return (
-    <div className="bg-gray-200 p-4 rounded-lg shadow-md fixed h-full right-0 mt-[-1rem] z-[-1]">
-    
-      <h2 className="text-lg font-bold mb-4">Networks</h2>
-
+    <div className="bg-gray-200 p-4 rounded-lg shadow-md fixed h-full right-0 mt-[-1rem] z-[10]">
+      <h2 className="text-lg font-bold mb-4">Random Picks</h2>
       <div className="space-y-4">
-        {connections.map((connection, index) => (
-          <InfluencerConnection
-            key={index}
-            name={connection.name}
-            role={connection.role}
-            // avatar={connection.avatar}
-          />
+        {influencers.map((influencer) => (
+          <div key={influencer.id} onClick={() => handleInfluencerClick(influencer.id)} className="flex items-center bg-gray-400 p-2 rounded-xl space-x-6 cursor-pointer">
+            <div>
+              {typeof influencer.profile_image === 'string' ? (
+                <img src={`http://localhost/storage/${influencer.profile_image}`} alt={influencer.name} className="w-12 h-12 rounded-full mr-4 cursor-pointer" />
+              ) : influencer.profile_image ? (
+                <img src={`http://localhost/storage/${influencer.profile_image.path}`} alt={influencer.name} className="w-12 h-12 rounded-full mr-4 cursor-pointer" />
+              ) : (
+                <div className="w-12 h-12 rounded-full mr-4 bg-gray-300 flex justify-center items-center">
+                  <i className="fas fa-user text-gray-600"></i>
+                </div>
+              )}
+            </div>
+            <div>
+              <h3 className="text-sm font-bold">{influencer.name}</h3>
+              <p className="text-gray-500">{influencer.role}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>

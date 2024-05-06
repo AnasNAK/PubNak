@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InfluencerController;
+use App\Http\Middleware\Cors;
 
 Route::post('contact',[ContactController::class,'contactUs']);
 Route::post('rmContact/{contact}',[ContactController::class,'delete']);
@@ -33,6 +35,7 @@ Route::prefix('auth')->group(function () {
 
 Route::apiResource('category',CategoryController::class);
 Route::apiResource('post',PostController::class);
+Route::get('allPsts',[PostController::class ,'allPsts']);
 Route::get('myPosts',[PostController::class, 'MyPosts']);
 Route::post('addFav/{post}', [PostController::class, 'addFav']);
 Route::get('myFav',[PostController::class, 'myFav']);
@@ -43,4 +46,13 @@ Route ::post('feedback',[ClientController::class, 'feedback']);
 
 Route::get('postStatistics',[PostController::class, 'postStatistics']);
 
+Route::patch('assignPost/{post}',[PostController::class, 'assigned']);
+
 Route::get('CatStatistics',[CategoryController::class, 'getCategoryStatistics']);
+
+Route::get('influencers',[InfluencerController::class, 'all' ]);
+
+Route::get('getRandomInfluencers',[InfluencerController::class, 'getRandomInfluencers' ]);
+
+Route::post('show',[InfluencerController::class, 'show' ]);
+

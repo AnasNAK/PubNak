@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/dashboard/influencer/Navbar';
 import SideBar from '@/components/dashboard/influencer/SideBar';
 import Profile from '@/components/dashboard/influencer/Profile';
-import Table from '@/components/dashboard/influencer/Table';
+import Fave from '@/components/dashboard/influencer/Favourite';
 import withAuth from '@/utils/withAuth';
 
 
@@ -14,7 +14,7 @@ const DashInfluencer: React.FC = () => {
             <Navbar />
             <SideBar setSelectedOption={setSelectedOption} />
             {selectedOption === 'profile' && <Profile />}
-            {selectedOption === 'table' && <Table />}
+            {selectedOption === 'Fav' && <Fave />}
         </div>
     );
 };

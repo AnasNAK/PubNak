@@ -57,9 +57,11 @@ public function __construct(public PostServiceInterface $service){
     // /**
     //  * Update the specified resource in storage.
     //  */
-    public function update( Post $post ,UpdatePostRequest $request)
+    public function update( Request $request ,Post $post )
     {
-        $post = $this->service->update($post ,$request);
+        // dd($request);
+      
+        $post = $this->service->update($request,$post );
 
         return $this->sendResponse(
             message:"Post updated successsfully",
@@ -67,7 +69,7 @@ public function __construct(public PostServiceInterface $service){
             code:202
         );
         
-    }
+    }   
 
     // /**
     //  * Remove the specified resource from storage.
@@ -116,6 +118,23 @@ public function __construct(public PostServiceInterface $service){
 
                 message: "Statistics received successfully",
                 result: $Statistics
+            );
+        }
+        public function assigned(Post $post ,Request $request){
+
+            $post = $this->service->assigned($post,$request );
+
+            return $this->sendResponse(
+                message:"Post updated successsfully",
+                result:$post,
+                code:202
+            );
+        }
+        public function allPsts(){
+
+            return $this->sendResponse(
+                message:"Posts lists",
+                result: $this->service->allPsts()
             );
         }
 }

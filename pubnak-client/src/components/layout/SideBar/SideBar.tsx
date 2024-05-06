@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { FaSearch, FaBell, FaCog, FaUserCircle } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '@/store/store';
+import { getUser } from '@/features/userSlice';
+import Cookies from 'js-cookie';
+
+
 
 interface HeaderProps {
   title: string;
 }
 
+
+
 const SideBar: React.FC<HeaderProps> = ({ title }) => {
   const { user, isLoading, error } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const token = Cookies.get('token');
+
+
+
+  if (!token) {
+    console.log('Token not found in cookie');
+  }
+
+  useEffect(() => {
+
+    dispatch(getUser(token));
+  }, [dispatch]);
 
   const isUserRoleDefined = (obj: any): obj is { role: string } => {
     return typeof obj?.role === 'string';
@@ -20,7 +40,7 @@ const SideBar: React.FC<HeaderProps> = ({ title }) => {
       if (user.role === 'Client') {
         return <Link href="/DashClient"><FaUserCircle className="text-gray-400 cursor-pointer" /></Link>;
       } else if (user.role === 'Influencer') {
-        return <Link href="/DashInfluencer"><FaUserCircle className="text-gray-400 cursor-pointer" /></Link>;
+        return <Link href="/DashInfuencer"><FaUserCircle className="text-gray-400 cursor-pointer" /></Link>;
       }
     }
     return null;
@@ -31,8 +51,10 @@ const SideBar: React.FC<HeaderProps> = ({ title }) => {
       <Link href="/Posts" className="text-xl font-bold">
         {title}
       </Link>
-      <div className="flex items-center space-x-4">
-        <FaBell className="text-gray-400 cursor-pointer" />
+      <div className='flex justify-center items-center gap-3'>
+        <Link href='/Feed'>
+          <FaBell className="text-gray-400 cursor-pointer" />
+        </Link>
         {renderUserLink()}
       </div>
     </div>

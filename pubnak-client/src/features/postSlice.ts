@@ -1,11 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie"
-import { Post } from '@/types/interfaces';
+import { Post, Category } from '@/types/interfaces';
 
-
-
-  
 
 interface PostsState {
     posts: Post[];
@@ -23,15 +20,15 @@ export const fetchPosts = createAsyncThunk<Post[], void, { rejectValue: string }
     'posts/fetchPosts',
     async (_, { rejectWithValue }) => {
         try {
-            const token = Cookies.get('token'); 
+            const token = Cookies.get('token');
             if (!token) {
-              throw new Error('Token not found in cookie');
+                throw new Error('Token not found in cookie');
             }
-            const response = await axios.get<{data:Post[]}>("http://localhost/api/myPosts", {
+            const response = await axios.get<{ data: Post[] }>("http://localhost/api/myPosts", {
                 headers: {
-                  Authorization: `Bearer ${token}`, 
+                    Authorization: `Bearer ${token}`,
                 },
-              });
+            });
             // console.log(response.data.);
             return response.data.data;
         } catch (error) {
@@ -40,11 +37,21 @@ export const fetchPosts = createAsyncThunk<Post[], void, { rejectValue: string }
     }
 );
 
-export const addPost = createAsyncThunk<Post, Post, { rejectValue: string }>(
+export const addPost = createAsyncThunk<Post, { formData: FormData }, { rejectValue: string }>(
     'posts/addPost',
-    async (newPost, { rejectWithValue }) => {
+    async ({ formData }, { rejectWithValue }) => {
         try {
-            const response = await axios.post<Post>("http://localhost/api/post", newPost);
+            const token = Cookies.get('token');
+            if (!token) {
+                throw new Error('Token not found in cookie');
+            }
+            const response = await axios.post<Post>("http://localhost/api/post", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
             return response.data;
         } catch (error) {
             return rejectWithValue('Failed to add post');
@@ -52,21 +59,35 @@ export const addPost = createAsyncThunk<Post, Post, { rejectValue: string }>(
     }
 );
 
-export const updatePost = createAsyncThunk<Post, Partial<Post>, { rejectValue: string }>(
+export const updatePost = createAsyncThunk<Post, { id: number; formData: FormData }, { rejectValue: string }>(
     'posts/updatePost',
-    async (updatedPost, { rejectWithValue }) => {
-      try {
-        const response = await axios.put<Post>(`http://localhost/api/post/${updatedPost.id}`, updatedPost);
-        return response.data;
-      } catch (error) {
-        return rejectWithValue('Failed to update post');
-      }
-    }
-  );
-  
-  
+    async ({ id, formData }, { rejectWithValue }) => {
+        try {
+            const updatedFormData = new FormData();
 
-  export const deletePost = createAsyncThunk<number, number, { rejectValue: string }>(
+            formData.forEach((value, key) => {
+                updatedFormData.append(key, value);
+            });
+
+            const response = await axios.put<Post>(
+                `http://localhost/api/post/${id}`,
+                updatedFormData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue('Failed to update post');
+        }
+    }
+);
+
+
+export const deletePost = createAsyncThunk<number, number, { rejectValue: string }>(
     'posts/deletePost',
     async (postId, { rejectWithValue }) => {
         try {
@@ -78,6 +99,20 @@ export const updatePost = createAsyncThunk<Post, Partial<Post>, { rejectValue: s
     }
 );
 
+export const assignPostToInfluencer = createAsyncThunk(
+    'posts/assignPostToInfluencer',
+    async ({ postId, assigned }: { postId: number; assigned: number }, { rejectWithValue }) => {
+        try {
+
+            const response = await axios.patch(`http://localhost/api/assignPost/${postId}`, { assigned }, {
+
+            });
+            return response.data;
+        } catch (error) {
+            return rejectWithValue('Failed to assign post to influencer');
+        }
+    }
+);
 
 const postsSlice = createSlice({
     name: "posts",
@@ -103,7 +138,7 @@ const postsSlice = createSlice({
             })
             .addCase(addPost.fulfilled, (state, action) => {
                 state.loading = false;
-                state.posts.push(action.payload);
+                state.posts;
             })
             .addCase(addPost.rejected, (state, action) => {
                 state.loading = false;
@@ -135,7 +170,20 @@ const postsSlice = createSlice({
             .addCase(deletePost.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+            .addCase(assignPostToInfluencer.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(assignPostToInfluencer.fulfilled, (state, action) => {
+                state.loading = false;
+                // Handle the fulfilled state if needed
+            })
+            .addCase(assignPostToInfluencer.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
             });
+
     },
 });
 

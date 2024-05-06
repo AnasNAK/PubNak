@@ -82,8 +82,7 @@ class AuthController extends BaseApiController
          
 
             if($request->role === "Influencer"){
-                
-                
+                             
                 $user = Influencer::create($validatedData);
 
             }elseif($request->role === "Client"){
@@ -92,10 +91,7 @@ class AuthController extends BaseApiController
 
             }else{
                 return $this->sendError('problem in role part ',$code= 403);
-
             }
-
-          
             $response = [
                 'user' => $user
             ];
@@ -106,62 +102,66 @@ class AuthController extends BaseApiController
         }
     }
 
+    public function UpdateProfileClient(UpdateProfileRequest $request)
+{
+    $userId = $this->getUser($request);
+    $user = Client::findOrFail($userId);
 
-    public function UpdateProfileClient(UpdateProfileRequest $request){
-    
-
-        $userId = $this->getUser($request);
-    
-        $user = Client::findOrFail($userId);
-        
-        try{
-    
-            if ($request->filled('password')) {
-                $request['password'] = bcrypt($request['password']);
-            }
-    
-            $user->update($request->validated());
-    
-            if ($request->hasFile('image')) {
-                    $this->deleteImg($user);
-                    $this->storeImg($request->file('image'), $user);
-            }
-            
-            return $user->load('profileImage');
-    
-        } catch (\Exception $e){
-    
-            return $this->sendError('update profile failed.', [$e->getMessage()]);
-    
+    try {
+        if ($request->filled('password')) {
+            $request['password'] = bcrypt($request['password']);
         }
+
+        $user->update($request->validated());
+
+        if ($request->hasFile('image')) {
+            if ($user->profileImage) {
+                
+                $this->deleteImg($user);
+
+         
+                $this->updateImg($request->file('image'), $user);
+              
+            } else {
+                $this->storeImg($request->file('image'), $user);
+            }
+        }
+
+        return $user->load('profileImage');
+    } catch (\Exception $e) {
+        return $this->sendError('Update profile failed.', [$e->getMessage()]);
     }
+}
+
+    
     public function UpdateProfileInfluencer(UpdateProfileInfluencerRequest $request){
 
         $userId = $this->getUser($request);
     
         $user = Influencer::findOrFail($userId);
-        try{
-    
+        try {
             if ($request->filled('password')) {
                 $request['password'] = bcrypt($request['password']);
             }
     
-            
             $user->update($request->validated());
     
             if ($request->hasFile('image')) {
-                $this->deleteImg($user);
-                foreach ($request->file('image') as $image) {
-                    $this->storeImg($image, $user);
+                if ($user->profileImage) {
+                    
+                    $this->deleteImg($user);
+    
+             
+                    $this->updateImg($request->file('image'), $user);
+                  
+                } else {
+                    $this->storeImg($request->file('image'), $user);
                 }
             }
-            
+    
             return $user->load('profileImage');
-    
-        } catch (\Exception $e){
-    
-            return $this->sendError('update profile failed.', [$e->getMessage()]);
-    
+        } catch (\Exception $e) {
+            return $this->sendError('Update profile failed.', [$e->getMessage()]);
         }
     }
     
@@ -190,7 +190,6 @@ class AuthController extends BaseApiController
                 dd('you dont have a role you need to connect ');
             }
 
-        
     }
     
 }

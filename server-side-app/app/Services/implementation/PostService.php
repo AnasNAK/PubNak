@@ -4,7 +4,7 @@ namespace App\Services\Implementation;
 
 use app\Models\Post;
 use App\Http\Requests\StorePostRequest;
-use app\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Services\contract\PostServiceInterface;
 use App\Repositories\interface\PostRepositoryInterface;
 use Illuminate\Http\Request;
@@ -18,6 +18,9 @@ public function __construct(public PostRepositoryInterface $Repository){
 public function all(){
     return $this->Repository->all();
 }
+public function allPsts(){
+    return $this->Repository->allPsts();
+}
 
 public function store(StorePostRequest $request){
 
@@ -29,9 +32,9 @@ public function show(Post $post){
 
 }
 
-public function update(Post $category, UpdatePostRequest $request)
+public function update( Request $request,Post $post)
 {
-    return $this->Repository->update($category, $request);
+    return $this->Repository->update( $request ,$post);
 }
 
 public function delete(Post $post){
@@ -52,6 +55,10 @@ public function myFav(Request $request){
  public function Statistics(){
 
     return $this->Repository->Statistics();
+ }
+ public function assigned(Post $post , Request $request){
+
+    return $this->Repository->assigned($post,$request);
  }
 
 

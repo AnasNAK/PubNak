@@ -58,7 +58,7 @@ export const {
 export const fetchPosts = () => async (dispatch) => {
   dispatch(fetchPostsRequest());
   try {
-    const response = await axios.get("http://localhost/api/post");
+    const response = await axios.get("http://localhost/api/allPsts");
    
     dispatch(fetchPostsSuccess(response.data.data));
 

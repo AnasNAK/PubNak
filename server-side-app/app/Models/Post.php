@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'category_id', 'client_id'];
+    protected $fillable = ['title', 'content', 'category_id', 'client_id','assigned'];
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -24,6 +24,10 @@ class Post extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+    public function assigned_post()
+    {
+        return $this->belongsTo(Influencer::class ,'assigned');
     }
 
     public function influencer()

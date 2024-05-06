@@ -8,20 +8,30 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageUpload
 {
-    public function storeImg($image, object $obj)
+    public function storeImg($image, $obj)
     {
-
-        $imageName = $this->move($image);
-        image::create([
-            "path" => $imageName,
-            "imageable_id" => $obj->id,
-            "imageable_type" => get_class($obj)
-        ]);
+        try {
+            $imageName = $this->move($image);
+    
+            image::create([
+                "path" => $imageName,
+                "imageable_id" => $obj->id,
+                "imageable_type" => get_class($obj)
+            ]);
+        } catch (\Exception $e) {
+            throw new \RuntimeException("Error storing image: " . $e->getMessage());
+        }
     }
+    
     public function updateImg($image, object $obj)
     {
         $imageName = $this->move($image);
-        $obj->image()->update(["path" => $imageName]);
+        $obj->profileImage()->update(["path" => $imageName]);
+    }
+    public function updateImgP($image, object $obj)
+    {
+        $imageName = $this->move($image);
+        $obj->images()->update(["path" => $imageName]);
     }
 
     public function deleteImg(object $obj)

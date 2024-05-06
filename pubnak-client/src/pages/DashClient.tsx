@@ -12,7 +12,7 @@ const DashClient: React.FC = () => {
     <div className="flex min-h-screen bg-white">
       <SideBar setSelectedOption={setSelectedOption} />
       <div className="flex-1 flex flex-col">
-        <Navbar />
+        <Navbar  setSelectedOption={setSelectedOption}/>
         <div className="flex-1 p-6">
           {selectedOption === 'profile' && <Profile />}
           {selectedOption === 'Posts' && <Posts />}

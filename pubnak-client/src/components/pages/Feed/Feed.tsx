@@ -33,7 +33,6 @@ const Feed: React.FC = () => {
         </div>
         <div>
           <Calendar />
-          <ConnectionsList />
         </div>
       </div>
     </div>

@@ -1,6 +1,13 @@
 module.exports = {
   reactStrictMode: false,
-  // experimental: {
-  //   appDir: true,
-  // },
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '', 
+        pathname: '/storage/**',
+      },
+    ],
+  },
+};
